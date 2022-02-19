@@ -2,15 +2,15 @@ const mysql = require('mysql');
 require("dotenv").config();
 require('console.table');
 
-const connectionInfo = require('./dbinfo');
+const connectionInfo = require('./.env');
 const app = require('./index.js');
 
 const db = mysql.createConnection({
-    host: connectionInfo.db_host,
-    port: connectionInfo.db_port,
-    user: connectionInfo.db_user,
-    password: connectionInfo.db_pass,
-    database: "employeeTrackerDB"
+    host: 'localhost',
+    port: 3306,
+    user: process.env.DB_USER,
+    password: process.env.DB_PW,
+    database: process.env.DB_NAME,
 });
 db.connect(err => {
     if (err) throw err;
