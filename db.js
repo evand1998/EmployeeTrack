@@ -4,14 +4,11 @@ require('console.table');
 
 const connectionInfo = require('./.env');
 const app = require('./index.js');
-
-const db = mysql.createConnection({
+new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PW, {
     host: 'localhost',
-    port: 3306,
-    user: process.env.DB_USER,
-    password: process.env.DB_PW,
-    database: process.env.DB_NAME,
-});
+    dialect: 'mysql',
+    port: 3306
+  })
 db.connect(err => {
     if (err) throw err;
     app.init();
